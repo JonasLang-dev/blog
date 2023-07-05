@@ -8,6 +8,7 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  min-height: 44vh;
 }
 
 @media screen and (max-width: 996px) {
@@ -20,4 +21,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.masthead {
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: auto;
+  opacity: 30%;
 }

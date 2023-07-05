@@ -6,8 +6,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "超级可爱加菲",
-  tagline: "会写代码的猫",
+  title: "Jonas Lang",
+  tagline: "Record daily, daily learning",
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
@@ -29,7 +29,12 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: "en",
-    locales: ["en", "zh"],
+    locales: ["en", "zh-Hans"],
+    localeConfigs: {
+      en: {
+        htmlLang: "en-US",
+      },
+    },
   },
 
   presets: [
@@ -99,18 +104,14 @@ const config = {
                 label: "Tutorial",
                 to: "/docs/intro",
               },
-              {
-                label: "文档",
-                to: "/docs",
-              },
             ],
           },
           {
             title: "社交",
             items: [
               {
-                label: "Twitter",
-                href: "https://twitter.com/docusaurus",
+                label: "GitHub",
+                href: "https://github.com/JonasLang-dev",
               },
             ],
           },
@@ -120,10 +121,6 @@ const config = {
               {
                 label: "博客",
                 to: "/blog",
-              },
-              {
-                label: "GitHub",
-                href: "https://github.com/facebook/docusaurus",
               },
             ],
           },

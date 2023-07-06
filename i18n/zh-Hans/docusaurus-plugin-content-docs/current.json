@@ -1,18 +1,14 @@
 {
   "version.label": {
-    "message": "Next",
+    "message": "下一页",
     "description": "The label for version current"
   },
   "sidebar.docs.category.Tutorial - Basics": {
-    "message": "Tutorial - Basics",
+    "message": "入门 - 基础",
     "description": "The label for category Tutorial - Basics in sidebar docs"
   },
   "sidebar.docs.category.Tutorial - Basics.link.generated-index.description": {
-    "message": "5 minutes to learn the most important Docusaurus concepts.",
+    "message": "5分钟入门Docusaurus",
     "description": "The generated-index page description for category Tutorial - Basics in sidebar docs"
-  },
-  "sidebar.docs.category.Tutorial - Extras": {
-    "message": "Tutorial - Extras",
-    "description": "The label for category Tutorial - Extras in sidebar docs"
   }
 }

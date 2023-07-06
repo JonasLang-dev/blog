@@ -69,18 +69,18 @@ const config = {
       // Replace with your project's social card
       image: "img/social-card.svg",
       navbar: {
-        title: "加菲的博客",
+        title: "Jonas",
         logo: {
           alt: "My Site Logo",
           src: "img/logo.svg",
         },
         items: [
-          { to: "/blog", label: "博客", position: "left" },
+          { to: "/blog", label: "Blog", position: "left" },
           {
             type: "docSidebar",
             sidebarId: "docs",
             to: "/docs",
-            label: "文档",
+            label: "Docs",
             position: "left",
           },
           {
@@ -98,7 +98,7 @@ const config = {
         style: "dark",
         links: [
           {
-            title: "文档",
+            title: "Documents",
             items: [
               {
                 label: "Tutorial",
@@ -107,7 +107,7 @@ const config = {
             ],
           },
           {
-            title: "社交",
+            title: "Social",
             items: [
               {
                 label: "GitHub",
@@ -116,10 +116,10 @@ const config = {
             ],
           },
           {
-            title: "更多",
+            title: "More",
             items: [
               {
-                label: "博客",
+                label: "Blog",
                 to: "/blog",
               },
             ],

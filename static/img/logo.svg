@@ -1,5 +1,5 @@
-<svg width="1024.000000pt" height="1024.000000pt" viewBox="0 0 1024.000000 1024.000000" xmlns="http://www.w3.org/2000/svg">
-  <g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)" fill="#fefefe" fill-opacity="0" stroke="none">
+<svg width="1024.000000pt" height="1024.000000pt"  viewBox="0 0 1024.000000 1024.000000" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)" fill="#fefefe" fill-opacity="0"  stroke="none">
     <path d="M0 5120 l0 -5120 5120 0 5120 0 0 5120 0 5120 -5120 0 -5120 0 0
 -5120z m7805 3990 c33 -16 90 -54 127 -84 121 -101 306 -327 495 -608 105
 -155 163 -267 163 -311 0 -31 -30 -97 -54 -116 -9 -8 -16 -19 -16 -25 0 -24
@@ -32,7 +32,7 @@ l0 18 -30 7 c-38 8 -159 87 -275 179 -49 39 -161 133 -247 209 l-157 138 -30
 220 113 c121 61 276 147 345 191 l125 79 101 101 c56 55 124 135 153 178 l52
 78 20 107 c24 128 45 205 69 252 19 37 55 74 80 83 25 8 72 -3 135 -33z" />
   </g>
-  <g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)" fill="currentColor" fill-opacity="1"  stroke="none">
+  <g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)" fill="#000000"  stroke="none">
     <path d="M7660 9153 c-26 -10 -61 -47 -80 -83 -24 -47 -45 -124 -69 -252 l-20
 -107 -52 -78 c-29 -43 -97 -123 -153 -178 l-101 -101 -125 -79 c-69 -44 -224
 -130 -345 -191 l-220 -113 -200 -11 c-110 -6 -229 -15 -265 -21 -97 -15 -176
@@ -64,7 +64,7 @@ c-73 -28 -179 -67 -237 -85 l-105 -34 -1180 -224 -1180 -224 -125 19 c-443 67
 106 19 20 c31 34 51 83 51 123 l0 39 -34 70 c-38 81 -188 306 -310 467 -184
 243 -322 380 -441 437 -61 29 -128 44 -155 33z" />
   </g>
-  <g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)" fill="#fefefe" fill-opacity="0" stroke="none">
+  <g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)" fill="#dedede"  stroke="none">
     <path d="M7651 9149 c-39 -16 -18 -19 24 -4 l40 14 -20 0 c-11 0 -31 -5 -44
 -10z" />
     <path d="M7597 9103 c-4 -3 -7 -11 -7 -17 l0 -10 12 12 c6 6 9 14 7 17 -3 3
@@ -2509,4 +2509,13 @@ l-10 0 12 -15z" />
     <path d="M1563 1313 c9 -2 23 -2 30 0 6 3 -1 5 -18 5 l-30 0 18 -5z" />
   </g>
   <g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)" fill="#5b5b5b" stroke="none" />
+ <defs>
+    <linearGradient id="gradient" x1="16" x2="16" y1="32" y2="24" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#000"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+	<style>
+    @media (prefers-color-scheme:dark){:root{filter:invert(100%)}}
+  </style>
 </svg>

@@ -279,7 +279,7 @@
     "description": "The title of the homepage hero"
   },
   "homepage.hero.subtitle": {
-    "message": "记录日常，日常学习",
+    "message": "日常学习，记录日常",
     "description": "The subtitle of the homepage hero"
   },
   "homepage.visitMyBlog": {

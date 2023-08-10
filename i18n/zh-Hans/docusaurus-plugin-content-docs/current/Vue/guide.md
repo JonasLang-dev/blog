@@ -603,12 +603,725 @@ function even(numbers) {
 
 ## 事件处理
 
+* 内联事件处理器
+
+``` jsx
+const count = ref(0)
+
+<button @click="count++">Add 1</button>
+<p>Count is: {{ count }}</p>
+```
+
+内联处理器调用方法
+
+``` jsx
+function say(message) {
+  alert(message)
+}
+
+<button @click="say('hello')">Say hello</button>
+<button @click="say('bye')">Say bye</button>
+```
+
+* 方法事件处理器
+
+``` jsx
+const name = ref('Vue.js')
+
+function greet(event) {
+  alert(`Hello ${name.value}!`)
+  // `event` 是 DOM 原生事件
+  if (event) {
+    alert(event.target.tagName)
+  }
+}
+
+<!-- `greet` 是上面定义过的方法名 -->
+<button @click="greet">Greet</button>
+```
+
+### 事件修饰符
+
+``` jsx
+<!-- 单击事件将停止传递 -->
+<a @click.stop="doThis"></a>
+
+<!-- 提交事件将不再重新加载页面 -->
+<form @submit.prevent="onSubmit"></form>
+
+<!-- 修饰语可以使用链式书写 -->
+<a @click.stop.prevent="doThat"></a>
+
+<!-- 也可以只有修饰符 -->
+<form @submit.prevent></form>
+
+<!-- 仅当 event.target 是元素本身时才会触发事件处理器 -->
+<!-- 例如：事件处理器不来自子元素 -->
+<div @click.self="doThat">...</div>
+
+<!-- 添加事件监听器时，使用 `capture` 捕获模式 -->
+<!-- 例如：指向内部元素的事件，在被内部元素处理前，先被外部处理 -->
+<div @click.capture="doThis">...</div>
+
+<!-- 点击事件最多被触发一次 -->
+<a @click.once="doThis"></a>
+
+<!-- 滚动事件的默认行为 (scrolling) 将立即发生而非等待 `onScroll` 完成 -->
+<!-- 以防其中包含 `event.preventDefault()` -->
+<div @scroll.passive="onScroll">...</div>
+```
+
+### 按键修饰符
+
+#### 按键别名​
+
+Vue 为一些常用的按键提供了别名：
+
+* .enter
+* .tab
+* .delete (捕获“Delete”和“Backspace”两个按键)
+* .esc
+* .space
+* .up
+* .down
+* .left
+* .right
+
+##### 系统按键修饰符​
+
+你可以使用以下系统按键修饰符来触发鼠标或键盘事件监听器，只有当按键被按下时才会触发。
+
+* .ctrl
+* .alt
+* .shift
+* .meta
+
+``` jsx
+<!-- Alt + Enter -->
+<input @keyup.alt.enter="clear" />
+
+<!-- Ctrl + 点击 -->
+<div @click.ctrl="doSomething">Do something</div>
+```
+
+##### .exact 修饰符
+
+.exact 修饰符允许控制触发一个事件所需的确定组合的系统按键修饰符。
+
+``` jsx
+<!-- 当按下 Ctrl 时，即使同时按下 Alt 或 Shift 也会触发 -->
+<button @click.ctrl="onClick">A</button>
+
+<!-- 仅当按下 Ctrl 且未按任何其他键时才会触发 -->
+<button @click.ctrl.exact="onCtrlClick">A</button>
+
+<!-- 仅当没有按下任何系统按键时触发 -->
+<button @click.exact="onClick">A</button>
+```
+
+### 鼠标按键修饰符
+
+* .left
+* .right
+* .middle
+
 ## 表单输入绑定
+
+``` jsx
+<input
+  :value="text"
+  @input="event => text = event.target.value">
+  
+{/* v-model 省略上述步骤 */}
+<input v-model="text">
+
+
+<p>Message is: {{ message }}</p>
+<input v-model="message" placeholder="edit me" />
+
+<span>Multiline message is:</span>
+<p style="white-space: pre-line;">{{ message }}</p>
+<textarea v-model="message" placeholder="add multiple lines"></textarea>
+
+{/* 复选框 */}
+<input type="checkbox" id="checkbox" v-model="checked" />
+<label for="checkbox">{{ checked }}</label>
+
+const checkedNames = ref([])
+
+<div>Checked names: {{ checkedNames }}</div>
+
+<input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+<label for="jack">Jack</label>
+
+<input type="checkbox" id="john" value="John" v-model="checkedNames">
+<label for="john">John</label>
+
+<input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+<label for="mike">Mike</label>
+
+{/* 单选按钮 */}
+<div>Picked: {{ picked }}</div>
+
+<input type="radio" id="one" value="One" v-model="picked" />
+<label for="one">One</label>
+
+<input type="radio" id="two" value="Two" v-model="picked" />
+<label for="two">Two</label>
+
+{/* 选择器 */}
+<div>Selected: {{ selected }}</div>
+
+<select v-model="selected">
+  <option disabled value="">Please select one</option>
+  <option>A</option>
+  <option>B</option>
+  <option>C</option>
+</select>
+
+{/* 多选 */}
+<div>Selected: {{ selected }}</div>
+
+<select v-model="selected" multiple>
+  <option>A</option>
+  <option>B</option>
+  <option>C</option>
+</select>
+```
+
+### 值绑定
+
+``` jsx
+<!-- `picked` 在被选择时是字符串 "a" -->
+<input type="radio" v-model="picked" value="a" />
+
+<!-- `toggle` 只会为 true 或 false -->
+<input type="checkbox" v-model="toggle" />
+
+<!-- `selected` 在第一项被选中时为字符串 "abc" -->
+<select v-model="selected">
+  <option value="abc">ABC</option>
+</select>
+
+<input
+  type="checkbox"
+  v-model="toggle"
+  true-value="yes"
+  false-value="no" />
+
+<input
+  type="checkbox"
+  v-model="toggle"
+  :true-value="dynamicTrueValue"
+  :false-value="dynamicFalseValue" />
+
+<input
+  type="checkbox"
+  v-model="toggle"
+  :true-value="dynamicTrueValue"
+  :false-value="dynamicFalseValue" />
+
+<select v-model="selected">
+  <!-- 内联对象字面量 -->
+  <option :value="{ number: 123 }">123</option>
+</select>
+```
+
+### 修饰符
+
+``` jsx
+<!-- 在 "change" 事件后同步更新而不是 "input" -->
+<input v-model.lazy="msg" />
+
+// 用户输入自动转换为数字
+<input v-model.number="age" />
+
+// 默认自动去除用户输入内容中两端的空格
+<input v-model.trim="msg" />
+```
 
 ## 生命周期
 
+![lifecycle](/img/lifecycle.png)
+
 ## 侦听器
+
+``` jsx
+<script setup>
+import { ref, watch } from 'vue'
+
+const question = ref('')
+const answer = ref('Questions usually contain a question mark. ;-)')
+
+// 可以直接侦听一个 ref
+watch(question, async (newQuestion, oldQuestion) => {
+  if (newQuestion.indexOf('?') > -1) {
+    answer.value = 'Thinking...'
+    try {
+      const res = await fetch('https://yesno.wtf/api')
+      answer.value = (await res.json()).answer
+    } catch (error) {
+      answer.value = 'Error! Could not reach the API. ' + error
+    }
+  }
+})
+</script>
+
+<template>
+  <p>
+    Ask a yes/no question:
+    <input v-model="question" />
+  </p>
+  <p>{{ answer }}</p>
+</template>
+```
+
+``` jsx
+const x = ref(0)
+const y = ref(0)
+
+// 单个 ref
+watch(x, (newX) => {
+  console.log(`x is ${newX}`)
+})
+
+// getter 函数
+watch(
+  () => x.value + y.value,
+  (sum) => {
+    console.log(`sum of x + y is: ${sum}`)
+  }
+)
+
+// 多个来源组成的数组
+watch([x, () => y.value], ([newX, newY]) => {
+  console.log(`x is ${newX} and y is ${newY}`)
+})
+
+/* ------ */
+const obj = reactive({ count: 0 })
+
+// 错误，因为 watch() 得到的参数是一个 number
+watch(obj.count, (count) => {
+  console.log(`count is: ${count}`)
+})
+
+// 提供一个 getter 函数
+watch(
+  () => obj.count,
+  (count) => {
+    console.log(`count is: ${count}`)
+  }
+)
+```
+
+### 深层侦听器
+
+``` jsx
+
+// 直接给 watch() 传入一个响应式对象，会隐式地创建一个深层侦听器——该回调函数在所有嵌套的变更时都会被触发：
+const obj = reactive({ count: 0 })
+
+watch(obj, (newValue, oldValue) => {
+  // 在嵌套的属性变更时触发
+  // 注意：`newValue` 此处和 `oldValue` 是相等的
+  // 因为它们是同一个对象！
+})
+
+obj.count++
+
+// 相比之下，一个返回响应式对象的 getter 函数，只有在返回不同的对象时，才会触发回调：
+watch(
+  () => state.someObject,
+  () => {
+    // 仅当 state.someObject 被替换时触发
+  }
+)
+
+// 你也可以给上面这个例子显式地加上 deep 选项，强制转成深层侦听器：
+watch(
+  () => state.someObject,
+  (newValue, oldValue) => {
+    // 注意：`newValue` 此处和 `oldValue` 是相等的
+    // *除非* state.someObject 被整个替换了
+  },
+  { deep: true }
+)
+```
+
+### 即时回调的侦听器
+
+watch 默认是懒执行的：仅当数据源变化时，才会执行回调。
+
+我们可以通过传入 immediate: true 选项来强制侦听器的回调立即执行
+
+``` jsx
+watch(source, (newValue, oldValue) => {
+  // 立即执行，且当 `source` 改变时再次执行
+}, { immediate: true })
+```
+
+### watchEffect()
+
+每当 todoId 的引用发生变化时使用侦听器来加载一个远程资源
+
+``` jsx
+const todoId = ref(1)
+const data = ref(null)
+
+watch(todoId, async () => {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/todos/${todoId.value}`
+  )
+  data.value = await response.json()
+}, { immediate: true })
+
+// 使用watchEffect简化
+watchEffect(async () => {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/todos/${todoId.value}`
+  )
+  data.value = await response.json()
+})
+
+// 它会自动追踪 todoId.value 作为依赖（和计算属性类似）。每当 todoId.value 变化时，回调会再次执行。有了 watchEffect()，我们不再需要明确传递 todoId 作为源值。
+```
+
+只有一个依赖项的例子来说，watchEffect() 的好处相对较小。但是对于有多个依赖项的侦听器来说，使用 watchEffect() 可以消除手动维护依赖列表的负担。此外，如果你需要侦听一个嵌套数据结构中的几个属性，watchEffect() 可能会比深度侦听器更有效，因为它将只跟踪回调中被使用到的属性，而不是递归地跟踪所有的属性。
+
+#### watch vs. watchEffect​
+
+watch 和 watchEffect 都能响应式地执行有副作用的回调。它们之间的主要区别是追踪响应式依赖的方式：
+
+* watch 只追踪明确侦听的数据源。它不会追踪任何在回调中访问到的东西。另外，仅在数据源确实改变时才会触发回调。watch 会避免在发生副作用时追踪依赖，因此，我们能更加精确地控制回调函数的触发时机。
+
+* watchEffect，则会在副作用发生期间追踪依赖。它会在同步执行过程中，自动追踪所有能访问到的响应式属性。这更方便，而且代码往往更简洁，但有时其响应性依赖关系会不那么明确
+
+### 停止侦听器
+
+在 setup() 或 <script setup\\> 中用同步语句创建的侦听器，会自动绑定到宿主组件实例上，并且会在宿主组件卸载时自动停止。因此，在大多数情况下，你无需关心怎么停止一个侦听器。
+
+一个关键点是，侦听器必须用同步语句创建：如果用异步回调创建一个侦听器，那么它不会绑定到当前组件上，你必须手动停止它，以防内存泄漏。
+
+``` jsx
+<script setup>
+import { watchEffect } from 'vue'
+
+// 它会自动停止
+watchEffect(() => {})
+
+// ...这个则不会！
+setTimeout(() => {
+  watchEffect(() => {})
+}, 100)
+</script>
+
+const unwatch = watchEffect(() => {})
+
+// ...当该侦听器不再需要时
+unwatch()
+
+// 注意，需要异步创建侦听器的情况很少，请尽可能选择同步创建。如果需要等待一些异步数据，你可以使用条件式的侦听逻辑：
+// 需要异步请求得到的数据
+const data = ref(null)
+
+watchEffect(() => {
+  if (data.value) {
+    // 数据加载后执行某些操作...
+  }
+})
+```
 
 ## 模板引用
 
+虽然 Vue 的声明性渲染模型为你抽象了大部分对 DOM 的直接操作，但在某些情况下，我们仍然需要直接访问底层 DOM 元素。
+
+### 访问模板引用
+
+``` jsx
+<script setup>
+import { ref, onMounted } from 'vue'
+
+// 声明一个 ref 来存放该元素的引用
+// 必须和模板里的 ref 同名
+const input = ref(null)
+
+onMounted(() => {
+  input.value.focus()
+})
+</script>
+
+<template>
+  <input ref="input" />
+</template>
+
+/* -------- */
+export default {
+  setup() {
+    const input = ref(null)
+    // ...
+    return {
+      input
+    }
+  }
+}
+
+
+// 只可以在组件挂载后才能访问模板引用。如果你想在模板中的表达式上访问 input，在初次渲染时会是 null。
+watchEffect(() => {
+  if (input.value) {
+    input.value.focus()
+  } else {
+    // 此时还未挂载，或此元素已经被卸载（例如通过 v-if 控制）
+  }
+})
+```
+
+### 函数模板引用
+
+除了使用字符串值作名字，ref attribute 还可以绑定为一个函数，会在每次组件更新时都被调用。
+
+``` jsx
+<input :ref="(el) => { /* 将 el 赋值给一个数据属性或 ref 变量 */ }">
+```
+
+需要使用动态的 :ref 绑定才能够传入一个函数。当绑定的元素被卸载时，函数也会被调用一次，此时的 el 参数会是 null。你当然也可以绑定一个组件方法而不是内联函数。
+
+### 组件上的 ref
+
+``` jsx
+<script setup>
+import { ref, onMounted } from 'vue'
+import Child from './Child.vue'
+
+const child = ref(null)
+
+onMounted(() => {
+  // child.value 是 <Child /> 组件的实例
+})
+</script>
+
+<template>
+  <Child ref="child" />
+</template>
+
+
+// 使用了 <script setup> 的组件是默认私有的：一个父组件无法访问到一个使用了 <script setup> 的子组件中的任何东西，除非子组件在其中通过 defineExpose 宏显式暴露：
+<script setup>
+import { ref } from 'vue'
+
+const a = 1
+const b = ref(2)
+
+// 像 defineExpose 这样的编译器宏不需要导入
+defineExpose({
+  a,
+  b
+})
+</script>
+```
+
 ## 组件基础
+
+### 自定义组件
+
+``` jsx
+<script setup>
+import { ref } from 'vue'
+
+const count = ref(0)
+</script>
+
+<template>
+  <button @click="count++">You clicked me {{ count }} times.</button>
+</template>
+
+// 使用组件
+<script setup>
+import ButtonCounter from './ButtonCounter.vue'
+</script>
+
+<template>
+  <h1>Here is a child component!</h1>
+  <ButtonCounter />
+</template>
+```
+
+### 传递 props
+
+``` jsx
+<!-- BlogPost.vue -->
+<script setup>
+defineProps(['title'])
+</script>
+
+<template>
+  <h4>{{ title }}</h4>
+</template>
+
+// ---
+
+const posts = ref([
+  { id: 1, title: 'My journey with Vue' },
+  { id: 2, title: 'Blogging with Vue' },
+  { id: 3, title: 'Why Vue is so fun' }
+])
+
+<BlogPost
+  v-for="post in posts"
+  :key="post.id"
+  :title="post.title"
+ />
+```
+
+### 监听事件
+
+``` jsx
+<script setup>
+defineProps(['title'])
+defineEmits(['enlarge-text'])
+</script>
+
+<template>
+  <div class="blog-post">
+    <h4>{{ title }}</h4>
+    <button @click="$emit('enlarge-text')">Enlarge text</button>
+  </div>
+</template>
+```
+
+``` jsx
+<script setup>
+import { ref } from 'vue'
+import BlogPost from './BlogPost.vue'
+  
+const posts = ref([
+  { id: 1, title: 'My journey with Vue' },
+  { id: 2, title: 'Blogging with Vue' },
+  { id: 3, title: 'Why Vue is so fun' }
+])
+
+const postFontSize = ref(1)
+</script>
+
+<template>
+  <div :style="{ fontSize: postFontSize + 'em' }">
+    <BlogPost
+      v-for="post in posts"
+      :key="post.id"
+      :title="post.title"
+      @enlarge-text="postFontSize += 0.1"
+    ></BlogPost>
+  </div>
+</template>
+```
+
+### 插槽分配内容
+
+<slot\> 元素来实现
+
+``` jsx
+<AlertBox>
+  Something bad happened.
+</AlertBox>
+
+<template>
+  <div class="alert-box">
+    <strong>This is an Error for Demo Purposes</strong>
+    <slot />
+  </div>
+</template>
+
+<style scoped>
+.alert-box {
+  /* ... */
+}
+</style>
+```
+
+们使用 <slot\> 作为一个占位符，父组件传递进来的内容就会渲染在这里。
+
+### 动态组件
+
+``` jsx
+import Home from './Home.vue'
+import Posts from './Posts.vue'
+import Archive from './Archive.vue'
+import { ref } from 'vue'
+ 
+const currentTab = ref('Home')
+
+const tabs = {
+  Home,
+  Posts,
+  Archive
+}
+</script>
+
+<template>
+  <div class="demo">
+    <button
+       v-for="(_, tab) in tabs"
+       :key="tab"
+       :class="['tab-button', { active: currentTab === tab }]"
+       @click="currentTab = tab"
+     >
+      {{ tab }}
+    </button>
+  <component :is="tabs[currentTab]" class="tab"></component>
+  </div>
+</template>
+```
+
+### 大小写区分
+
+HTML 标签和属性名称是不分大小写的，所以浏览器会把任何大写的字符解释为小写。这意味着当你使用 DOM 内的模板时，无论是 PascalCase 形式的组件名称、camelCase 形式的 prop 名称还是 v-on 的事件名称，都需要转换为相应等价的 kebab-case (短横线连字符) 形式：
+
+``` jsx
+// JavaScript 中的 camelCase
+const BlogPost = {
+  props: ['postTitle'],
+  emits: ['updatePost'],
+  template: `
+    <h3>{{ postTitle }}</h3>
+  `
+}
+
+<!-- HTML 中的 kebab-case -->
+<blog-post post-title="hello!" @update-post="onUpdatePost"></blog-post>
+```
+
+### 闭合标签
+
+在 DOM 模板中，我们必须显式地写出关闭标签：
+
+``` jsx
+<my-component /> <!-- 我们想要在这里关闭标签... -->
+<span>hello</span>
+```
+
+将被解析为：
+
+``` jsx
+<my-component>
+  <span>hello</span>
+</my-component> <!-- 但浏览器会在这里关闭标签 -->
+```
+
+### 元素位置限制
+
+<ul\>，<ol\>，<table\> 和 <select\>，相应的，某些元素仅在放置于特定元素中时才会显示，例如 <li\>，<tr\> 和 <option\>。
+
+``` jsx
+<table>
+  <blog-post-row></blog-post-row>
+</table>
+```
+
+自定义的组件 <blog-post-row\> 将作为无效的内容被忽略，因而在最终呈现的输出中造成错误。我们可以使用特殊的 is attribute 作为一种解决方案：
+
+``` jsx
+<table>
+  <tr is="vue:blog-post-row"></tr>
+</table>
+```

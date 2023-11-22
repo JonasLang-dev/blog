@@ -62,7 +62,7 @@ v-bind 指令指示 Vue 将元素的 id attribute 与组件的 dynamicId 属性�
 <button :disabled="isButtonDisabled">Button</button>
 ```
 
-当 isButtonDisabled 为真值或一个空字符串 (即 <button disabled=""\>) 时，元素会包含这个 disabled attribute。而当其为其他假值时 attribute 将被忽略。
+当 isButtonDisabled 为真值或一个空字符串 (即 button disabled="") 时，元素会包含这个 disabled attribute。而当其为其他假值时 attribute 将被忽略。
 
 #### 绑定多个值
 
@@ -477,7 +477,7 @@ const styleObject = reactive({
 
 * v-show 会在 DOM 渲染中保留该元素；v-show 仅切换了该元素上名为 display 的 CSS 属性。
 
-* v-show 不支持在 <template\> 元素上使用，也不能和 v-else 搭配使用。
+* v-show 不支持在 template 元素上使用，也不能和 v-else 搭配使用。
 
 ### v-if vs. v-show
 
@@ -999,7 +999,7 @@ watch 和 watchEffect 都能响应式地执行有副作用的回调。它们之�
 
 ### 停止侦听器
 
-在 setup() 或 <script setup\\> 中用同步语句创建的侦听器，会自动绑定到宿主组件实例上，并且会在宿主组件卸载时自动停止。因此，在大多数情况下，你无需关心怎么停止一个侦听器。
+在 setup() 或 script setup 中用同步语句创建的侦听器，会自动绑定到宿主组件实例上，并且会在宿主组件卸载时自动停止。因此，在大多数情况下，你无需关心怎么停止一个侦听器。
 
 一个关键点是，侦听器必须用同步语句创建：如果用异步回调创建一个侦听器，那么它不会绑定到当前组件上，你必须手动停止它，以防内存泄漏。
 
@@ -1218,7 +1218,7 @@ const postFontSize = ref(1)
 
 ### 插槽分配内容
 
-<slot\> 元素来实现
+slot 元素来实现
 
 ``` jsx
 <AlertBox>
@@ -1239,7 +1239,7 @@ const postFontSize = ref(1)
 </style>
 ```
 
-们使用 <slot\> 作为一个占位符，父组件传递进来的内容就会渲染在这里。
+使用 slot 作为一个占位符，父组件传递进来的内容就会渲染在这里。
 
 ### 动态组件
 
@@ -1310,7 +1310,9 @@ const BlogPost = {
 
 ### 元素位置限制
 
+``` jsx
 <ul\>，<ol\>，<table\> 和 <select\>，相应的，某些元素仅在放置于特定元素中时才会显示，例如 <li\>，<tr\> 和 <option\>。
+```
 
 ``` jsx
 <table>
@@ -1318,7 +1320,7 @@ const BlogPost = {
 </table>
 ```
 
-自定义的组件 <blog-post-row\> 将作为无效的内容被忽略，因而在最终呈现的输出中造成错误。我们可以使用特殊的 is attribute 作为一种解决方案：
+自定义的组件 blog-post-row 将作为无效的内容被忽略，因而在最终呈现的输出中造成错误。我们可以使用特殊的 is attribute 作为一种解决方案：
 
 ``` jsx
 <table>

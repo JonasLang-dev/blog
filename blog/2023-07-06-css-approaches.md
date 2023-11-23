@@ -1,8 +1,8 @@
 ---
-slug: css_evolution
-title: History of CSS evolution
+slug: css-modules-vs-css-in-js-vs-atomic-css
+title: CSS Modules vs CSS-in-JS vs Atomic CSS
 authors: jonas
-tags: [css, css-in-js, css-module]
+tags: [css, CSS-in-JS, CSS Modules CSS]
 ---
 
 ## CSS development process

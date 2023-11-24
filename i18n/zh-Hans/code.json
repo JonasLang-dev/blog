@@ -279,7 +279,7 @@
     "description": "The title of the homepage hero"
   },
   "homepage.hero.subtitle": {
-    "message": "日常学习，记录日常",
+    "message": "Coding经验之种种",
     "description": "The subtitle of the homepage hero"
   },
   "homepage.visitMyBlog": {
@@ -287,15 +287,15 @@
     "description": "visit my blog"
   },
   "homepage.features.aboutme": {
-    "message": "我是前端新人，兴趣是玩主机游戏，毕业于cs专业并热爱。同时也是arch Linux用户。",
+    "message": "ArchLinux用户，毕业于CS专业并且从事全职前端开发，热爱主机游戏，喜欢Coding。",
     "description": "about me"
   },
   "homepage.features.social": {
-    "message": "各位可以通过github关注我，如果有能帮助到你，欢迎star或者关注。",
+    "message": "后面是我的github，如果有能帮助到你，欢迎star或者关注。",
     "description": "social"
   },
   "homepage.features.portfolio": {
-    "message": "以下是我的一些个人项目展示。",
+    "message": "Template",
     "description": "social"
   },
   "common.aboutme": {

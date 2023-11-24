@@ -2,7 +2,7 @@
 slug: JS-functions
 title: JS 函数式编程
 authors: jonas
-tags: [bing maps api, react]
+tags: [JS]
 ---
 
 **编程范型**、**编程范式**或**程序设计法**(Programming paradigm)，是指软件工程重的一类典型的**编程风格**。常见的编程范型有：**函数式编程**[^1]、**指令编程**、**过程编程**、**面向对象编程等等**。

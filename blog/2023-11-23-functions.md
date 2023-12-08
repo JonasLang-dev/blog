@@ -2,7 +2,7 @@
 slug: JS-functions
 title: JS functional programming
 authors: jonas
-tags: [JS]
+tags: [JavaScript]
 ---
 
 Programming paradigm refers to a typical **programming style** in software engineering.Common programming paradigms are: **functional programming**[^1], **instruction programming**, **procedural programming**, **object-oriented programming, etc.**.
